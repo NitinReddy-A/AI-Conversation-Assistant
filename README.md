@@ -1,10 +1,10 @@
-# AI Assistant for Seamless Interview Prep
+# Interview CheatMate
 
-**Your Intelligent Companion for Interview Success**
+**Your Secret Weapon for Interview Success**
 
 ## Overview
 
-AI Assistant for Seamless Interview Prep is an innovative tool designed to assist users in preparing for interviews by leveraging advanced AI models and technologies. It facilitates seamless, real-time conversations on a web-based platform, analyzes user queries, and provides targeted assistance through state-of-the-art natural language processing and agent-based decision-making systems.
+Interview CheatMate is an innovative tool designed to assist users in preparing for interviews by leveraging advanced AI models and technologies. It facilitates seamless, real-time conversations on a web-based platform, analyzes user queries, and provides targeted assistance through state-of-the-art natural language processing and agent-based decision-making systems.
 
 ---
 
@@ -119,10 +119,10 @@ AI Assistant for Seamless Interview Prep is an innovative tool designed to assis
 ## Usage
 
 1. Access the Streamlit-based website via the provided URL.
-2. Click the "Speak Person" button to capture your voice input. The transcribed text will appear in the text box below.
-3. Engage in a conversation through the interface (voice).
+2. Click the "Record" button to capture your voice input. The transcribed text will appear in the text box below.
+3. Engage in a conversation through the interface (either text or voice).
 4. Click the "Help AI" button whenever assistance is needed.
-5. View the AI-generated response tailored to your query in the text box below.
+5. View the AI-generated response tailored to your query.
 
 ---
 
@@ -143,3 +143,4 @@ We welcome contributions! Please follow these steps:
 3. Submit a pull request with a detailed description of your changes.
 
 ---
+
