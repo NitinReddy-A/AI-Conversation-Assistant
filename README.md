@@ -5,6 +5,7 @@
 ## Overview
 
 Interview CheatMate is a cutting-edge tool crafted to support users during interviews by harnessing the power of advanced AI models and technologies. It enables smooth, real-time interactions on a web-based platform, processes user queries, and delivers tailored assistance using sophisticated natural language processing and intelligent decision-making systems.
+
 ---
 
 ## Features
