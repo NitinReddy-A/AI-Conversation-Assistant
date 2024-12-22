@@ -83,15 +83,15 @@ AI Assistant for Seamless Interview Prep is an innovative tool designed to assis
 
    ```bash
    git clone <repository_url>
-   cd AI-Interview-Helper
+   cd AI-InterviewAssistant
    ```
 
 2. Create and activate a virtual environment:
 
    ```bash
-   python -m venv venv
-   source venv/bin/activate   # For Linux/Mac
-   venv\Scripts\activate     # For Windows
+   python -m venv .venv
+   source .venv/bin/activate   # For Linux/Mac
+   .venv\Scripts\activate     # For Windows
    ```
 
 3. Install dependencies:
