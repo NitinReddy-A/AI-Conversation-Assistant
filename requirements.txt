@@ -1,0 +1,21 @@
+pypdf
+langchain
+langchain_community
+pinecone # Vector storage
+pytest
+#boto3
+pymupdf
+#fitz
+#cohere
+crewai
+crewai_tools
+load_dotenv
+langchain-huggingface
+load_dotenv
+streamlit
+sounddevice
+soundfile
+numpy
+groq
+openai
+python-dotenv
