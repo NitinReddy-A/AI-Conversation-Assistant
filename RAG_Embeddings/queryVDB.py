@@ -34,12 +34,12 @@ def search_query(model, index, query, top_k=5):
     except Exception as e:
         print(f"Search query failed: {str(e)}")
 
-if __name__ == "__main__":
-    api_key = "pcsk_6RHz6Y_LbWKy2peojQDozzxQJCUh95UwNvJeq1uLmcrmtYUFcQaUZGVzNkz6p2UakPBLf5"  # Replace with your actual PineconeAPI key
-    index_name = "assignment"  # Replace with your actual Pinecone index name
-    query = "Restaurant management and food wastage"
+# if __name__ == "__main__":
+#     api_key = "pcsk_6RHz6Y_LbWKy2peojQDozzxQJCUh95UwNvJeq1uLmcrmtYUFcQaUZGVzNkz6p2UakPBLf5"  # Replace with your actual PineconeAPI key
+#     index_name = "assignment"  # Replace with your actual Pinecone index name
+#     query = "Restaurant management and food wastage"
 
-    # Initialize the model and index, then perform the search query
-    model, index = initialize(api_key, index_name, use_gpu=False)
-    res = search_query(model,index,query)
-    print(res)
+#     # Initialize the model and index, then perform the search query
+#     model, index = initialize(api_key, index_name, use_gpu=False)
+#     res = search_query(model,index,query)
+#     print(res)

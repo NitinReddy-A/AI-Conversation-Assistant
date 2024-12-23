@@ -71,7 +71,7 @@ def execute_task(question, context):
         return rag_response
 
 # Example usage
-question = "What is the capital of France?"
-context = "Some context about European countries."
-response = execute_task(question, context)
-print(response)
+# question = "What is the capital of France?"
+# context = "Some context about European countries."
+# response = execute_task(question, context)
+# print(response)
