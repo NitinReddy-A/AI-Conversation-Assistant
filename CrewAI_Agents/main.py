@@ -84,6 +84,6 @@ def delegate_task(question):
         print(f"Error in task delegation: {e}")
         return None
 
-input_question = 'Can you elaborate on your experience working on the "Income Tax GPT" project and its specific contributions?'
-result = delegate_task(input_question)
-print("Final result:", result)
+# input_question = 'Can you elaborate on your experience working on the "Income Tax GPT" project and its specific contributions?'
+# result = delegate_task(input_question)
+# print("Final result:", result)
