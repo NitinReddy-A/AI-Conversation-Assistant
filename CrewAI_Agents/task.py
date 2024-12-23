@@ -7,6 +7,7 @@ rag_task = Task(
     description=(
         "Analyze the question: {question}. Use relevant information provided in the {context} "
         "Analyze the relevant information with the question to provide a short response. Make sure you do not provide any extra information and stay relevant to the context."
+        "If the context is not related to the question , then just start your answer with NO RELATION"
     ),
     expected_output="A comprehensive answer to the question derived from context.",
     agent=rag_agent,
