@@ -23,7 +23,7 @@ def search_query(model, index, query, top_k=5):
 
         # Print results with the retrieved text and metadata
         for result in results['matches']:
-            score = round(result['score'], 2)
+            score = round(result['score'], 5)
             text = result['metadata'].get('text', 'No Text Found')
             source = result['metadata'].get('source', 'Unknown Source')
             # print(f"Score: {score} - Text: {text} - Source: {source}")
