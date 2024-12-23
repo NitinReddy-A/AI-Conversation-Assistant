@@ -1,4 +1,3 @@
-pypdf
 langchain
 langchain_community
 pinecone
