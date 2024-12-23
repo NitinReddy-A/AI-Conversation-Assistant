@@ -1,11 +1,7 @@
 from crewai import Crew
-#from json import dumps as convert_to_json
 from CrewAI_Agents.agents import Designator_agent, web_agent, LLM_agent,rag_agent
 from CrewAI_Agents.task import designation_task, web_task, llm_task,rag_task
-import torch
-from sentence_transformers import SentenceTransformer
-from pinecone import Pinecone
-from queryVDB import initialize, search_query
+from RAG_Embeddings.queryVDB import initialize, search_query
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -70,7 +66,6 @@ def delegate_task(question):
             return web_result
         
         elif designation_result_string == 'LLM Agent':
-            #print("hii")
             llm_result = crew1.kickoff(inputs={'question': question})
             print(f"LLM agent result:{llm_result}")
             return llm_result
