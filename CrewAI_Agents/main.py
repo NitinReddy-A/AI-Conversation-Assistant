@@ -55,11 +55,10 @@ crew3 = Crew(
 
 
 def delegate_task(question):
-    # Step 1: Designation Task - Analyze and assign the task to the appropriate agent
+
     try:
         designation_result = crew.kickoff(inputs={'question': question})
         
-        # Log type and inspect the result
         print("Type of designation_result:", type(designation_result))
         print(designation_result)
         designation_result_string = str(designation_result)
