@@ -51,23 +51,27 @@ llm_crew = Crew(
 # Define the sequence of execution
 def execute_task(question, context):
     # Step 1: Use RAG agent to find relevant context
-    rag_response = rag_crew.kickoff(question=question, context=context)
+    rag_response = rag_crew.kickoff(inputs={"question": question, "context": context})
+
+    rag_responsestr = str(rag_response)
     
-    if "no relation" in rag_response.lower():
+    if "no relation" in rag_responsestr.lower():
         # Step 2: Use Designator agent to choose the appropriate agent
-        agent_choice = designator_crew.kickoff(question=question)
+        agent_choice = designator_crew.kickoff(inputs={"question": question})
+
+        agent_choicestr = str(agent_choice)
         
-        if "web search agent" in agent_choice.lower():
+        if "web search agent" in agent_choicestr.lower():
             # Step 3: Use Web Search Agent
-            return web_crew.kickoff(question=question)
+            return web_crew.kickoff(inputs={"question": question})
         else:
             # Step 3: Use LLM Agent
-            return llm_crew.kickoff(question=question)
+            return llm_crew.kickoff(inputs={"question": question})
     else:
         return rag_response
 
 # Example usage
-# question = "What is the capital of France?"
-# context = ""
-# response = execute_task(question, context)
-# print(response)
+question = "What is the capital of France?"
+context = "Some context about European countries."
+response = execute_task(question, context)
+print(response)
