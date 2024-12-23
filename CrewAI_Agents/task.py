@@ -27,7 +27,6 @@ web_task = Task(
     expected_output="The answer to the question derived from web search results.",
     agent=web_agent, 
     tools=[Web_tool], 
-    # tool_inputs={"search_query":{'description':"{question}",'type':'str'}},  # Pass the question directly as the search query
     async_execution=False,
 ) 
 
