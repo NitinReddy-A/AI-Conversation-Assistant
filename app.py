@@ -243,7 +243,7 @@ def handle_help_from_ai():
     st.rerun()
 
 def main():
-    st.title("Interview Helper")
+    st.title("AI Conversation Assistant")
 
     if not groq_client:
         st.error("Please configure your GROQ_API_KEY in the .env file")
