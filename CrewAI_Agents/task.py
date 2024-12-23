@@ -38,7 +38,6 @@ rag_task = Task(
     ),
     expected_output="A comprehensive answer to the question derived from context.",
     agent=rag_agent, 
-    #tool_inputs={"query": {'description': "{question}", 'type': 'str'}},
     async_execution=False,
 )
 

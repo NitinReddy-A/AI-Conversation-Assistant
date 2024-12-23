@@ -1,19 +1,16 @@
 import streamlit as st
-import time
 import sounddevice as sd
 import soundfile as sf
 import os
 from groq import Groq
 import numpy as np
 import io
-from datetime import datetime
-from dotenv import load_dotenv
 import queue
 import threading
 import time
-#import openai
 from CrewAI_Agents.main import delegate_task
-# Load environment variables
+from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -61,10 +58,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Initialize Groq client
+
 groq_api_key = os.getenv("GROQ_API_KEY")
-#initialize openai key
-#open_api_key = os.getenv("OPENAI_API_KEY")
+
 if not groq_api_key:
     st.error("GROQ_API_KEY not found in environment variables")
     groq_client = None
@@ -180,7 +176,7 @@ def handle_help_from_ai():
 
     # Filter conversation for Person 1 and Person 2 after the last AI response
     if "last_ai_index" not in st.session_state:
-        st.session_state.last_ai_index = -1  # Initialize last AI index if not present
+        st.session_state.last_ai_index = -1 
 
     start_index = st.session_state.last_ai_index + 1
     relevant_conversation = transcribed_text[start_index:]
@@ -195,13 +191,10 @@ def handle_help_from_ai():
     else:
         summarized_text = "No new conversation available to analyze."
 
-    # Call OpenAI to generate a question based on the summarized conversation
+    # Call Groq to generate a question based on the summarized conversation
     try:
-        # Use Groq's GPT to generate a question
-        client = Groq(
-            api_key=os.environ.get("GROQ_API_KEY"),
-        )
-        chat_completion = client.chat.completions.create(
+        # Use Groq's Model to generate a question based on the conversation
+        chat_completion = groq_client.chat.completions.create(
             messages=[
                 {
                     "role": "system",
@@ -212,7 +205,7 @@ def handle_help_from_ai():
                     "content": f"Based on the following interview conversation, summarize and generate a professional, one-line question that is directly relevant to the discussion:\n\n{summarized_text}"
                 }
             ],
-            model="llama3-8b-8192",  # Replace with your desired Groq model
+            model="gemma2-9b-it",
             max_tokens=150,
             temperature=0.7
         )
@@ -227,26 +220,24 @@ def handle_help_from_ai():
         st.session_state.last_ai_index = len(st.session_state.conversation) - 1
 
         
-        #time.sleep(4)
+        return question
 
         ########################################################################################################
-        response = delegate_task(question)
+        # response = delegate_task(question)
 
-        # Add the question to the conversation
-        st.session_state.conversation.append(("AI Answer", response))
+        # # Add the question to the conversation
+        # st.session_state.conversation.append(("AI Answer", response))
 
-        # Update the AI's response index
-        st.session_state.last_ai_index = len(st.session_state.conversation) - 1
+        # # Update the AI's response index
+        # st.session_state.last_ai_index = len(st.session_state.conversation) - 1
 
-    # except openai.OpenAIError as e:
-    #     st.error(f"OpenAI API Error: {e}")
-    #     print(f"OpenAI API Error: {e}")  # This will print any OpenAI-specific errors
+
 
     except Exception as e:
         st.error(f"Error generating question: {e}")
-        print(f"Error generating question: {e}")  # This will print any general errors
+        print(f"Error generating question: {e}") 
 
-    # Rerun to update the UI
+    
     st.rerun()
 
 def main():
@@ -258,7 +249,6 @@ def main():
 
     initialize_session_state()
 
-    # Center-align the buttons using columns
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col1:
@@ -270,6 +260,11 @@ def main():
     with col3:
         if st.button("Press to get\nHelp from AI", key="help_from_ai_button"):
             question =  handle_help_from_ai()
+            if question:
+                response = delegate_task(question)
+                st.session_state.conversation.append(("AI Answer", response))
+                st.session_state.last_ai_index = len(st.session_state.conversation) - 1
+
 
 
     # Display conversation in simple text format

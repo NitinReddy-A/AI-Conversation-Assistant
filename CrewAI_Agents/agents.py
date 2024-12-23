@@ -1,27 +1,16 @@
 from crewai import Agent,LLM
 from CrewAI_Agents.tools import Web_tool
+import os
 from dotenv import load_dotenv
-from dotenv import load_dotenv
-
 load_dotenv()
 
-import os
 groq_api_key= os.getenv("GROQ_API_KEY")
 
-# print(openai_api_key)
-
-# llm = LLM(
-#     model="gpt-3.5-turbo",
-#     temperature=0.7,
-#     base_url="https://api.openai.com/v1",
-#     api_key= openai_api_key
-# )
 llm = LLM(
     model="groq/gemma2-9b-it",
     temperature=0.7,
     api_key= groq_api_key
 )
-
 
 
 ## Create a Designator agent
@@ -50,7 +39,7 @@ rag_agent = Agent(
         "It retrieves relevant information from a knowledge base and uses advanced language models to generate a comprehensive response."
     ),
     allow_delegation=True,
-    llm=llm  # Assuming llm is defined elsewhere in your code
+    llm=llm 
 )
 
 ## Create a Web Agent
@@ -64,7 +53,7 @@ web_agent = Agent(
         "It will search the web for relevant information and synthesize it into a coherent answer for the provided question. "
         "If the query cannot be answered directly from available sources, the agent will use the web to find the most accurate, up-to-date information.Make sure you respond in less than 2 lines only."
     ),
-    tools=[Web_tool],  # Web search tool for retrieving information
+    tools=[Web_tool],
     allow_delegation=False,
     llm=llm
 )
