@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class PdfProcessor:
-    def _init_(self, api_key, index_name, use_gpu=False):
+    def __init__(self, api_key, index_name, use_gpu=False):
         self.device = "cuda" if use_gpu and torch.cuda.is_available() else "cpu"
         self.query_prompt_name = "s2p_query"
         self.setup_pinecone(api_key, index_name)
