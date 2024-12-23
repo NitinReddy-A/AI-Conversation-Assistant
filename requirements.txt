@@ -6,7 +6,6 @@ pymupdf
 crewai
 crewai_tools
 load_dotenv
-langchain-huggingface
 streamlit
 sounddevice
 soundfile
