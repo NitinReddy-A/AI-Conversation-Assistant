@@ -1,89 +1,73 @@
 from crewai import Crew
-from CrewAI_Agents.agents import Designator_agent, web_agent, LLM_agent,rag_agent
-from CrewAI_Agents.task import designation_task, web_task, llm_task,rag_task
-from RAG_Embeddings.queryVDB import initialize, search_query
+from CrewAI_Agents.agents import Designator_agent, web_agent, LLM_agent, rag_agent
+from CrewAI_Agents.task import designation_task, web_task, llm_task, rag_task
 from dotenv import load_dotenv
 
 load_dotenv()
 
 import os
-pinecone_api_key= os.getenv("PINECONE_API_KEY")
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
 
-
-crew = Crew(
-    agents=[Designator_agent], 
-    tasks=[designation_task], 
-    #process=Process.parallel, 
-    memory=True, 
-    cache=True, 
+# Initialize RAG Crew
+rag_crew = Crew(
+    agents=[rag_agent],
+    tasks=[rag_task],
+    memory=True,
+    cache=True,
     max_rpm=100,
-    share_crew=True 
-)
-crew1 = Crew(
-    agents=[LLM_agent], 
-    tasks=[llm_task], 
-    #process=Process.parallel, 
-    memory=True, 
-    cache=True, 
-    max_rpm=100,
-    share_crew=True 
+    share_crew=True
 )
 
-crew2 = Crew(
-    agents=[web_agent], 
-    tasks=[web_task], 
-    #process=Process.parallel, 
-    memory=True, 
-    cache=True, 
+# Initialize Designator Crew
+designator_crew = Crew(
+    agents=[Designator_agent],
+    tasks=[designation_task],
+    memory=True,
+    cache=True,
     max_rpm=100,
-    share_crew=True 
+    share_crew=True
 )
 
-crew3 = Crew(
-    agents=[rag_agent], 
-    tasks=[rag_task], 
-    #process=Process.parallel, 
-    memory=True, 
-    cache=True, 
+# Initialize Web Search Crew
+web_crew = Crew(
+    agents=[web_agent],
+    tasks=[web_task],
+    memory=True,
+    cache=True,
     max_rpm=100,
-    share_crew=True 
+    share_crew=True
 )
 
+# Initialize LLM Crew
+llm_crew = Crew(
+    agents=[LLM_agent],
+    tasks=[llm_task],
+    memory=True,
+    cache=True,
+    max_rpm=100,
+    share_crew=True
+)
 
-def delegate_task(question):
-
-    try:
-        designation_result = crew.kickoff(inputs={'question': question})
+# Define the sequence of execution
+def execute_task(question, context):
+    # Step 1: Use RAG agent to find relevant context
+    rag_response = rag_crew.kickoff(question=question, context=context)
+    
+    if "no relation" in rag_response.lower():
+        # Step 2: Use Designator agent to choose the appropriate agent
+        agent_choice = designator_crew.kickoff(question=question)
         
-        print("Type of designation_result:", type(designation_result))
-        print(designation_result)
-        designation_result_string = str(designation_result)
-        print(designation_result_string)
-        
-        if designation_result_string == 'Web Search Agent':
-            web_result = crew2.kickoff(inputs={'question': question})
-            print("Web search result:", web_result)
-            return web_result
-        
-        elif designation_result_string == 'LLM Agent':
-            llm_result = crew1.kickoff(inputs={'question': question})
-            print(f"LLM agent result:{llm_result}")
-            return llm_result
-        
-        elif designation_result_string == 'RAG':
-            model, index = initialize(pinecone_api_key, "assignment", use_gpu=False)
-            rag_result =  search_query(model,index,question)
-            llm_result = crew3.kickoff(inputs={'question': question, 'context': rag_result})
-            print(f"LLM agent result:{llm_result}")
-            return llm_result
-        
+        if "web search agent" in agent_choice.lower():
+            # Step 3: Use Web Search Agent
+            return web_crew.kickoff(question=question)
         else:
-            print(f"No valid agent found for the task: {designation_result}")
-            return None
-    except Exception as e:
-        print(f"Error in task delegation: {e}")
-        return None
+            # Step 3: Use LLM Agent
+            return llm_crew.kickoff(question=question)
+    else:
+        return rag_response
 
-# input_question = 'Can you elaborate on your experience working on the "Income Tax GPT" project and its specific contributions?'
-# result = delegate_task(input_question)
-# print("Final result:", result)
+# Example usage
+# question = "What is the capital of France?"
+# context = ""
+# response = execute_task(question, context)
+# print(response)

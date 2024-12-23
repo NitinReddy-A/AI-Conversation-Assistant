@@ -8,7 +8,8 @@ import io
 import queue
 import threading
 import time
-from CrewAI_Agents.main import delegate_task
+from CrewAI_Agents.main import execute_task
+from RAG_Embeddings.queryVDB import initialize, search_query
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -60,6 +61,7 @@ st.markdown("""
 
 
 groq_api_key = os.getenv("GROQ_API_KEY")
+PINECONE_API_KEY=os.getenv("PINECONE_API_KEY")
 
 if not groq_api_key:
     st.error("GROQ_API_KEY not found in environment variables")
@@ -198,7 +200,7 @@ def handle_help_from_ai():
             messages=[
                 {
                     "role": "system",
-                    "content": "Analyze the interview conversation and generate a professional, one-line question focusing on topics like projects, internships, or relevant details. Ensure the question is clear, concise, and relevant to the context of the interview.Additionally, sometimes there can we generic question and try to keep relevency to the latest conversation"
+                    "content": "Provide the question strictly less than 9 words only. Analyze the complete conversation and extract the most suitable question. Don't try to be creative, use the most recent conversation and provide direct simple questions."
                 },
                 {
                     "role": "user",
@@ -261,7 +263,9 @@ def main():
         if st.button("Press to get\nHelp from AI", key="help_from_ai_button"):
             question =  handle_help_from_ai()
             if question:
-                response = delegate_task(question)
+                model, index = initialize(PINECONE_API_KEY, "assignment", use_gpu=False)
+                context=search_query(model,index,question)
+                response = execute_task(question,context)
                 st.session_state.conversation.append(("AI Answer", response))
                 st.session_state.last_ai_index = len(st.session_state.conversation) - 1
 
