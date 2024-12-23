@@ -126,7 +126,7 @@ class PdfProcessor:
 
 def main():
     try:
-        api_key = "pcsk_4pzsjc_8cVoQW7396rN8FEyk8wUVwMRPNaVaPXrTDCj1ysE5taA1oZtPXDBakAZtHJSST3"
+        api_key = "pcsk_6RHz6Y_LbWKy2peojQDozzxQJCUh95UwNvJeq1uLmcrmtYUFcQaUZGVzNkz6p2UakPBLf5"
         index_name = "assignment"
         folder_path = "data"
 
@@ -144,4 +144,4 @@ def main():
         raise
 
 if __name__ == "__main__":
-    main()
+   main()
