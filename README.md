@@ -16,11 +16,11 @@ Conversation AI Assistant is a smart, user-friendly tool designed to enhance use
 
 ### 2. Speech-to-Text Conversion
 
-- Groq Whisper API is utilized to convert spoken interactions into text, which is stored in a buffer for further processing.
+- Groq's `whisper-large-v3-turbo` LLM is utilized to convert spoken interactions into text, which is stored in a buffer for further processing.
 
 ### 3. AI-Powered Question Analysis
 
-- When a user requests help, Groq's Llama LLM analyzes the text buffer to extract the most relevant question based on the context of the conversation.
+- When a user requests help, Groq's `gemma2-9b-it` LLM analyzes the text buffer to extract the most relevant question based on the context of the conversation.
 
 ### 4. Intelligent Agent Designation
 
@@ -33,14 +33,14 @@ Conversation AI Assistant is a smart, user-friendly tool designed to enhance use
 ### 5. Advanced Retrieval Mechanisms
 
 - **RAG Workflows**:
-  - Semantic search powered by Pinecone vector database.
+  - Semantic search powered by `Pinecone` vector database.
   - Sentence-transformer embeddings using the `all-MiniLM-L6-v2` model.
-  - PDF content extraction facilitated by PyMuPDF.
-  - Orchestration and integration via LangChain.
+  - PDF content extraction facilitated by `Pymupdf`.
+  - Orchestration and integration via `LangChain`.
 
 ### 6. Web Search Integration
 
-- Serper API enables robust web search capabilities to address information needs beyond local data.
+- `Serper AI` API enables robust web search capabilities to address information needs beyond local data.
 
 ### 7. Response Presentation
 
@@ -54,19 +54,19 @@ Conversation AI Assistant is a smart, user-friendly tool designed to enhance use
 
 - **Frontend**: Streamlit for an interactive and intuitive user interface.
 - **Backend**:
-  - Groq Whisper API for Speech-to-Text.
-  - Groq Llama LLM for question extraction and analysis.
-  - Crew AI agentic models for task delegation and execution.
+  - Groq `whisper-large-v3-turbo` LLM for Speech-to-Text.
+  - Groq `gemma2-9b-it` LLM for question extraction and analysis.
+  - `Crew AI` agentic models for task delegation and execution.
 
 ### Supporting Tools
 
 - **Data Processing**:
-  - PyMuPDF for PDF processing.
-  - Sentence-Transformers for embedding generation.
+  - `PyMuPDF` for PDF processing.
+  - Sentence-Transformer model `all-MiniLM-L6-v2` for embedding generation.
 - **Vector Storage**:
-  - Pinecone for efficient and scalable vector-based data retrieval.
+  - `Pinecone` for efficient and scalable vector-based data retrieval.
 - **Web Search**:
-  - Serper API integrated as a Crew AI tool for web search tasks.
+  - `Serper AI` API integrated as a Crew AI tool for web search tasks.
 
 ---
 
