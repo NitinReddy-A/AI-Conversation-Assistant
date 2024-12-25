@@ -1,10 +1,10 @@
-# Interview CheatMate
+# AI Conversation Assistant
 
-**Your Secret Weapon for Interview Success**
+**Your Secret Weapon for perfect conversations**
 
 ## Overview
 
-Interview CheatMate is a cutting-edge tool crafted to support users during interviews by harnessing the power of advanced AI models and technologies. It enables smooth, real-time interactions on a web-based platform, processes user queries, and delivers tailored assistance using sophisticated natural language processing and intelligent decision-making systems.
+Conversation AI Assistant is a smart, user-friendly tool designed to enhance user interactions by leveraging advanced AI models and technologies. Built to work in real-time on a web platform to answer questions, solve problems, and provide tailored help. Whether you need quick info or detailed guidance, it’s got you covered with intelligent, on-the-spot responses.
 
 ---
 
