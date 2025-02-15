@@ -73,8 +73,8 @@ Say hello to **AI Conversation Assistant** – your ultimate AI buddy for smooth
 
 ### Prerequisites
 
-- 🔸 Python 3.8+.
-- 🔸 Virtual environment setup (recommended).
+- 🔸 Python 3.12.
+- 🔸 Virtual environment setup (Recommended).
 
 ### Steps
 
